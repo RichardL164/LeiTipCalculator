@@ -28,28 +28,36 @@ public class TipCalculator {
 
         System.out.println("Do you know our discount code for the day? Hint: All roads lead to ____");
         String code = scan.nextLine();
-
-        System.out.println("--------------------");
-        double totalTip = (int) (foodCostTotal * (tipPercent / 100.00) * 100) / 100.0; //gets total tip the customers need to pay
-        System.out.println("Total bill before tip and discount: " + foodCostTotal);
-        System.out.println("Total percentage: " + tipPercent + "%");
-        double totalBill = (int) ((totalTip + foodCostTotal) * 100) / 100.0; //total bill customer needs to pay
         if (code.equals("rome")) {
             System.out.println("Congratulations! You get a 10% discount!");
-            totalBill *= (int) ((totalBill * 0.9) * 100)/ 100.0; //10% discount off total bill
-            foodCostTotal *= 0.9;
-            totalTip *= 0.9;
         } else {
             System.out.println("Sorry, that is not the discount code.");
         }
+        System.out.println("--------------------");
+        System.out.println("Total bill before tip and discount: " + foodCostTotal);
+        System.out.println("Total percentage: " + tipPercent + "%");
+        double totalTip = (int) ((foodCostTotal * (tipPercent / 100.00)) * 100) / 100.0; //gets total tip the customers need to pay
+        if (code.equals("rome")) {
+            totalTip *= 0.9; //10% discount off total bill
+        }
+        double totalBill = (int) ((totalTip + foodCostTotal) * 100) / 100.0; //total bill customer needs to pay
+        if (code.equals("rome")) {
+            totalBill *= 0.9; //10% discount off total bill
+        }
         double beforeTip = (int) (foodCostTotal / numPeople * 100) / 100.0;
+        if (code.equals("rome")) {
+            beforeTip *= 0.9; //10% discount off total bill
+        }
         double tipPerPerson = (int) (totalTip / numPeople * 100) / 100.0; //how much every person needs to tip
+        if (code.equals("rome")) {
+            tipPerPerson *= 0.9; //10% discount off total bill
+        }
         double costPerPerson = (int) (totalBill / numPeople * 100) / 100.0; //how much everyone needs to pay
 
-        System.out.println("Total tip: " + totalTip);
-        System.out.println("Total bill with tip: " + totalBill);
-        System.out.println("Per person cost before tip: " + beforeTip);
-        System.out.println("Tip per person: " + tipPerPerson);
+        System.out.println("Total tip: " + (int) (totalTip * 100) / 100.0);
+        System.out.println("Total bill with tip: " + (int) (totalBill * 100) / 100.0);
+        System.out.println("Per person cost before tip: " + (int) (beforeTip * 100) / 100.0);
+        System.out.println("Tip per person: " + (int) (tipPerPerson * 100) / 100.0);
         System.out.println("Total cost per person: " + costPerPerson);
         System.out.println("Items ordered: ");
         System.out.println("--------------------");
